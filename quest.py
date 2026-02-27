@@ -95,11 +95,8 @@ def use(player):
             player["health"]+=100
             player["bag"].remove("magic ring")
         print(f"100 health power is added , Health is now{player["health"]}.")
-    elif "dagger" in player["bag"]:
-        damage_done+=10
-        print("it provides more damage no matter what class")
     else:
-        print("not in bag recently")
+        print("not in bag currently")
 #----------combat loop-----------
 def attack(player,monster):
     print(f"\n⚔️ Battle Start: {player['name']} vs {monster['name']}\n")
@@ -128,8 +125,12 @@ def attack(player,monster):
             print("okay, ,magic ring here")
             use(player)
         elif action in ["5","dagger"]:
-            print("okay , dagger is here")
-            use(player)
+            if "dagger" in player["bag"]:
+                print("okay , dagger is here")
+                damage_done+=10
+                print("it provides more damage no matter what class")
+            else:
+                print("not in bag  currently ")
         elif action in ["6", "check bag"]:
             print(f"🎒 Inventory: {player['bag']}")
 
@@ -192,9 +193,8 @@ def shopinventory(player):
         if choice in ["1","view"]:
             print(f"the available are:")
             for item, price in shop.items():
-                if player["gold"]>{}:
+                if player["gold"]>=price:
                     print(f"- {item.title()} : {price} gold")
-            # yaha pe uper error arhi hai🙏🏻
             print(f"💰 Your gold: {player['gold']}")
 
         if choice in ["2","choose to buy"]:
